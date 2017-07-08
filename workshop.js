@@ -7,22 +7,17 @@ function getDistance(pos1, pos2) {
 
 function getIssPosition() {
   return request('http://api.open-notify.org/iss-now.json')
-  .then(
-    function(response) {
-      
-      // Parse as JSON
-      
-      var position = JSON.parse(response)
-      
-      // Return object with lat and lng
-       var objPosition = {};
-       
-       objPosition.lat = position.iss_position.latitude;
-       objPosition.lng = position.iss_position.longitude;
-      
-    }
-  )
+  .then(function(response) {
+    var position = JSON.parse(response);
+    var issLocation = {}; //empty object for position information
+      issLocation.lat = position.iss_position.latitude;
+      issLocation.lng = position.iss_position.longitude;
+      console.log(issLocation);
+  })
 }
+
+getIssPosition();
+
 
 function getAddressPosition(address) {
 
