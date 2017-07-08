@@ -32,7 +32,7 @@ function getAddressPosition(address) {
    var addressObj = {};
    addressObj.lat = googleAddress.results[0].geometry.location.lat;
    addressObj.lng = googleAddress.results[0].geometry.location.lng;
-   console.log(addressObj);
+   //console.log(addressObj);
    return addressObj;
  })
  .catch(function(error) {
@@ -44,11 +44,26 @@ function getAddressPosition(address) {
 getAddressPosition("665 Quaker Road Welland ON L3C 3H1");
 
 function getCurrentTemperatureAtPosition(position) {
+  return request("https://api.darksky.net/forecast/990d09b1cfd3ab9d6820c3c4218e5396/43.0219085,-79.27941419999999") 
+  .then(
+    function(response) {
+      var tempLatLng = JSON.parse(response);
+      var currentTemp = tempLatLng["currently"];
+      var tempOnly = currentTemp["temperature"];
+        //console.log(tempOnly);
+        return tempOnly;
+    })
+    
+    .catch(function(error) {
+      console.log("We could not find the temperature");
+    })
 
 }
 
-function getCurrentTemperature(address) {
+getCurrentTemperatureAtPosition();
 
+function getCurrentTemperature(address) {
+  
 }
 
 function getDistanceFromIss(address) {
